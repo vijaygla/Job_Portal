@@ -1,6 +1,8 @@
 // Rest client extention vs code should downloaded 
 // File name must be .http extention and in backend folder
 
+
+// User------------------------------------------
 @host = http://localhost:9000/api/v1/user
 
 POST {{host}}/register
@@ -25,4 +27,37 @@ Content-Type: application/json
   "role": "Recruiter"
 }
 
+###
+
+POST {{host}}/profile/update
+Content-Type: application/json
+
+{
+  "fullName": "Vijay"
+}
+
+
+###
+
+GET {{host}}/logout
+
+
+###
+// Company ----------------------------------------------------
+@host2 = http://localhost:9000/api/v1/company
+
+POST {{host2}}/register
+Content-Type: application/json
+
+{
+  "companyName": "testing company"
+}
+
+###
+
+GET {{host2}}/get
+
+###
+
+GET {{host2}}/get/6782a6a91c79f0ae08afb40b
 
