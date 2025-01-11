@@ -4,6 +4,7 @@ import cors from "cors";
 import chalk from "chalk";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
+import userRoute from "./routes/user.route.js"
 
 dotenv.config({})
 
@@ -27,7 +28,16 @@ const corsOption = {
 app.use(cors(corsOption));
 
 const PORT = process.env.PORT || 3000;
+
+app.use("/api/v1/user", userRoute);
+
+// thses are the api which will use for testing
+// "http://localhost:8000/api/v1/user/register";
+// "http://localhost:8000/api/v1/user/login";
+// "http://localhost:8000/api/v1/user/is";
+
+
 app.listen(PORT, () => {
   connectDB();
-  console.log(chalk.yellowBright.bold.underline(`Server is Running at port ${PORT}`));
+  console.log(chalk.yellowBright.bold(`Server is Running at port ${PORT}`));
 })
