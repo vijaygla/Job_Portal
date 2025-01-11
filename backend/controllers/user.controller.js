@@ -1,27 +1,23 @@
 import { User } from "../models/user.model.js";
-import bycrpt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
-// user Register
 export const register = async (req, res) => {
   try {
-    const { fullName, email, phoneNumber, password, role } = res.body;
-
+    const { fullName, email, phoneNumber, password, role } = req.body;
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
         message: "Something is missing",
         success: false,
       });
     }
-
-    let user = await User.findOne({ email });
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
-        message: "User already exist please login",
+        message: "User already exist with this email.",
         success: false,
       });
     }
-    const hashedPassword = await bycrpt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await User.create({
       fullName,
@@ -32,52 +28,48 @@ export const register = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: "Account created Successfully",
+      messege: "Account created successfully",
       success: true,
     });
   } catch (error) {
-    console.log("error");
+    console.log(error);
   }
 };
 
-// User Login
+
+
+// Login page 
 export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-
     if (!email || !password || !role) {
       return res.status(400).json({
         message: "Something is missing",
         success: false,
       });
     }
-
-    // is email exist in data base or not
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Invalid Credential",
+        message: "Incorrect email or password",
         success: false,
       });
     }
-
-    const isPasswordMatch = await bycrpt.compare(password, user.password);
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       return res.status(400).json({
-        message: "Invalid Password",
+        message: "Incorrect email or password",
         success: false,
       });
     }
 
-    // check role is correct for user or not
     if (role != user.role) {
       return res.status(400).json({
-        message: "Account doesn't exist for this role",
+        message: "Account doesn't exit with current role",
         success: false,
       });
     }
 
-    // token generate to protect the data
     const tokenData = {
       userId: user._id,
     };
@@ -96,13 +88,13 @@ export const login = async (req, res) => {
 
     return res
       .status(200)
-      .cookie("token", {
+      .cookie("token", token, {
         maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpsOnly: true,
+        httpsonly: true,
         sameSite: "strict",
       })
       .json({
-        message: `Welcome back ${user.fullName}`,
+        message: "Welcome back " + user.fullName,
         user,
         success: true,
       });
@@ -111,11 +103,13 @@ export const login = async (req, res) => {
   }
 };
 
-// User Logout
+
+
+// Logout
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", { maxAge: 0 }).json({
-      message: "Logout successfully",
+    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+      message: "Logged out successfully",
       success: true,
     });
   } catch (error) {
@@ -123,10 +117,9 @@ export const logout = async (req, res) => {
   }
 };
 
-// User Update
 export const updateProfile = async (req, res) => {
   try {
-    const { fullName, email, phoneNumber, bio, skills } = res.body;
+    const { fullName, email, phoneNumber, bio, skills } = req.body;
     const file = req.file;
     if (!fullName || !email || !phoneNumber || !bio || !skills) {
       return res.status(400).json({
@@ -135,11 +128,9 @@ export const updateProfile = async (req, res) => {
       });
     }
 
-    // cloudinary ayega idhar
-
-
+    // cloudenary ayega idhar
     const skillsArray = skills.split(",");
-    const userId = req.id; // middleware authentigation
+    const userId = req.id; // middleware authentication
     let user = await User.findById(userId);
 
     if (!user) {
@@ -149,13 +140,13 @@ export const updateProfile = async (req, res) => {
       });
     }
 
+    // upadaing data
     (user.fullName = fullName),
       (user.email = email),
       (user.phoneNumber = phoneNumber),
-      (user.profile.bio = bio),
       (user.profile.skills = skillsArray);
 
-    // resume comes leter here
+    // resume comes later here...
 
     await user.save();
 
@@ -171,9 +162,8 @@ export const updateProfile = async (req, res) => {
     return res.status(200).json({
       message: "Profile updated successfully",
       user,
-      success: true
-    })
-
+      success: true,
+    });
   } catch (error) {
     console.log(error);
   }
