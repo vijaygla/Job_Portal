@@ -1,11 +1,11 @@
 import { User } from "../models/user.model.js";
-import bycrpt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 // user Register
 export const register = async (req, res) => {
   try {
-    const { fullName, email, phoneNumber, password, role } = res.body;
+    const { fullName, email, phoneNumber, password, role } = req.body;
 
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res.status(400).json({
@@ -21,7 +21,7 @@ export const register = async (req, res) => {
         success: false,
       });
     }
-    const hashedPassword = await bycrpt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await User.create({
       fullName,
@@ -36,7 +36,7 @@ export const register = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log("error");
+    console.log(error);
   }
 };
 
@@ -76,6 +76,7 @@ export const login = async (req, res) => {
         success: false,
       });
     }
+
 
     // token generate to protect the data
     const tokenData = {
