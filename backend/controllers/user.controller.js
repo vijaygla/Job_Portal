@@ -35,7 +35,9 @@ export const register = async (req, res) => {
       message: "Account created Successfully",
       success: true,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log("error");
+  }
 };
 
 // User Login

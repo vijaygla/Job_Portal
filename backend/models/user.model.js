@@ -9,12 +9,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
-    type: String,
-    required: true
-  },
   phoneNumber: {
     type: Number,
+    required: true
+  },
+  password: {
+    type: String,
     required: true
   },
   role: {
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   profile: {
-    bio: {type:String},
+    bio: {type: String},
     skills: [{type: String}],
     resume: {type: String},  // url to resume files
     resumeOriginalName: {type: String},
