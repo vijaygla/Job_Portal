@@ -59,5 +59,14 @@ GET {{host2}}/get
 
 ###
 
-GET {{host2}}/get/6782a6a91c79f0ae08afb40b
+GET {{host2}}/get/6782aa08d72153cf93311614
+
+
+### 
+PUT {{host2}}/update/6782aa08d72153cf93311614
+Content-Type: application/json
+
+{
+  "name": "Vijay Company"
+}
 
