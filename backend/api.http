@@ -1,24 +1,29 @@
-// Rest client extention vs code should downloaded 
-// File name must be .http extention and in backend folder
+# Rest client extention vs code should downloaded 
+# File name must be .http extention and in backend folder
 
 
-// User------------------------------------------
-@host = http://localhost:9000/api/v1/user
+@userHost = http://localhost:9000/api/v1/user
+@companyHost = http://localhost:9000/api/v1/company
+@applicationHost = http://localhost:9000/api/v1/application
 
-POST {{host}}/register
+
+
+### -----------------User----------------------
+
+POST {{userHost}}/register
 Content-Type: application/json
 
 {
-  "fullName": "Vijay",
-  "email": "vijay@gmail.com",
+  "fullName": "Kumar",
+  "email": "kumar@gmail.com",
   "phoneNumber": "7763949572",
-  "password": "vijay@123",
-  "role": "Recruiter"
+  "password": "kumar@123",
+  "role": "Student"
 }
 
 ###
 
-POST {{host}}/login
+POST {{userHost}}/login
 Content-Type: application/json
 
 {
@@ -29,24 +34,32 @@ Content-Type: application/json
 
 ###
 
-POST {{host}}/profile/update
+POST {{userHost}}/login
+Content-Type: application/json
+
+{
+  "email": "kumar@gmail.com",
+  "password": "kumar@123",
+  "role": "Student"
+}
+
+###
+
+POST {{userHost}}/profile/update
 Content-Type: application/json
 
 {
   "fullName": "Vijay"
 }
 
-
 ###
 
-GET {{host}}/logout
+GET {{userHost}}/logout
 
 
-###
-// Company ----------------------------------------------------
-@host2 = http://localhost:9000/api/v1/company
+### ---------------Company-------------------
 
-POST {{host2}}/register
+POST {{companyHost}}/register
 Content-Type: application/json
 
 {
@@ -55,18 +68,68 @@ Content-Type: application/json
 
 ###
 
-GET {{host2}}/get
+GET {{companyHost}}/get
 
 ###
 
-GET {{host2}}/get/6782aa08d72153cf93311614
+GET {{companyHost}}/get/6782aa08d72153cf93311614
 
 
 ### 
-PUT {{host2}}/update/6782aa08d72153cf93311614
+PUT {{companyHost}}/update/678387e2346d7620fedc63a9
 Content-Type: application/json
 
 {
-  "name": "Vijay Company"
+  "name": "Vijay Company tech"
+}
+
+###----------jobRoute by admin and user also
+
+@jobHost = http://localhost:9000/api/v1/job
+
+POST {{jobHost}}/post
+Content-Type: application/json
+
+{
+  "title": "backend developer",
+  "description": "I want backend developer for my comnany",
+  "requirements": "React js, Shadcn ui, Api Testing",
+  "salary": "12",
+  "location": "Hydrabad",
+  "jobType": "Full Time",
+  "position": 12,
+  "experience": 1,
+  "companyId": "6782a6a91c79f0ae08afb40b"
+}
+
+
+###
+
+GET {{jobHost}}/get
+
+###
+GET {{jobHost}}/getadminjobs
+
+### 
+GET {{jobHost}}/get/6783e9261a672a9b2f3f9786
+
+
+###------------Application--------------------
+
+GET {{applicationHost}}/apply/678659423f9ac4e586c42e33
+
+
+### 
+GET {{applicationHost}}/get
+
+###
+GET {{applicationHost}}/678659183f9ac4e586c42e2f/applicants
+
+###
+POST {{applicationHost}}/status/678692ba20527a0191cc5570/update
+Content-Type: application/json
+
+{
+  "status": "Accepted"
 }
 
