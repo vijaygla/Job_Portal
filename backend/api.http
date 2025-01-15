@@ -3,13 +3,25 @@
 
 
 @userHost = http://localhost:9000/api/v1/user
+@jobHost = http://localhost:9000/api/v1/job
 @companyHost = http://localhost:9000/api/v1/company
 @applicationHost = http://localhost:9000/api/v1/application
 
 
 
 ### -----------------User----------------------
+POST {{userHost}}/register
+Content-Type: application/json
 
+{
+  "fullName": "Vijay",
+  "email": "vijay@gmail.com",
+  "phoneNumber": "7763949572",
+  "password": "vijay@123",
+  "role": "Recruiter"
+}
+
+###
 POST {{userHost}}/register
 Content-Type: application/json
 
@@ -84,8 +96,6 @@ Content-Type: application/json
 }
 
 ###----------jobRoute by admin and user also
-
-@jobHost = http://localhost:9000/api/v1/job
 
 POST {{jobHost}}/post
 Content-Type: application/json
