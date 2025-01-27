@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Navbar from './components/shared/Navbar'
 import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import Home from './components/Home'
@@ -48,7 +47,7 @@ const appRouter = createBrowserRouter([
 
 
   
-  // admin ke liye yha se start hoga
+  // for admin
   {
     path: "/admin/companies",
     element: <ProtectedRoute><Companies /></ProtectedRoute>
@@ -75,13 +74,12 @@ const appRouter = createBrowserRouter([
   },
 
 ])
-function App() {
 
+function App() {
   return (
     <div>
       <RouterProvider router={appRouter} />
     </div>
   )
 }
-
 export default App
