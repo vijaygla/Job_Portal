@@ -68,3 +68,5 @@ const AdminJobsTable = () => {
 }
 
 export default AdminJobsTable
+
+
