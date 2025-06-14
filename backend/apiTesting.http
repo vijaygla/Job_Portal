@@ -1,145 +1,138 @@
-# Rest client extention vs code should downloaded 
-# File name must be .http extention and in backend folder
+@host = http://localhost:8000/api/v1/user
+@hostcompany = http://localhost:8000/api/v1/company
+@hostjob = http://localhost:8000/api/v1/job
+@hostapplication = http://localhost:8000/api/v1/application
 
-
-@userHost = http://localhost:9000/api/v1/user
-@jobHost = http://localhost:9000/api/v1/job
-@companyHost = http://localhost:9000/api/v1/company
-@applicationHost = http://localhost:9000/api/v1/application
-
-
-
-### -----------------User----------------------
-POST {{userHost}}/register
+POST {{host}}/register
 Content-Type: application/json
 
 {
-  "fullname": "Vijay",
-  "email": "vijay@gmail.com",
-  "phoneNumber": "7763949572",
-  "password": "vijay@123",
-  "role": "Recruiter"
-}
-
-###
-POST {{userHost}}/register
-Content-Type: application/json
-
-{
-  "fullname": "Kumar",
-  "email": "kumar@gmail.com",
-  "phoneNumber": "7763949572",
-  "password": "kumar@123",
-  "role": "Student"
+    "fullname":"vijay",
+    "email":"vijayji@gmail.com",
+    "phoneNumber":"1234567890",
+    "password":"vijay123",
+    "role":"recruiter"
 }
 
 ###
 
-POST {{userHost}}/login
+POST {{host}}/register
 Content-Type: application/json
 
 {
-  "email": "vijay@gmail.com",
-  "password": "vijay@123",
-  "role": "Recruiter"
+    "fullname":"Vijay",
+    "email":"vijay@gmail.com",
+    "phoneNumber":"1234567890",
+    "password":"vijay123",
+    "role":"student"
 }
 
 ###
-
-POST {{userHost}}/login
+POST {{host}}/login
 Content-Type: application/json
 
 {
-  "email": "kumar@gmail.com",
-  "password": "kumar@123",
-  "role": "Student"
+    "email":"vijayji@gmail.com",
+    "password":"vijay123",
+    "role":"recruiter"
 }
-
 ###
-
-POST {{userHost}}/profile/update
+POST {{host}}/login
 Content-Type: application/json
 
 {
-  "fullname": "Vijay"
-}
-
-###
-
-GET {{userHost}}/logout
-
-
-### ---------------Company-------------------
-
-POST {{companyHost}}/register
-Content-Type: application/json
-
-{
-  "companyName": "testing company"
-}
-
-###
-
-GET {{companyHost}}/get
-
-###
-
-GET {{companyHost}}/get/6782aa08d72153cf93311614
-
-
-### 
-PUT {{companyHost}}/update/678387e2346d7620fedc63a9
-Content-Type: application/json
-
-{
-  "name": "Vijay Company tech"
-}
-
-###----------jobRoute by admin and user also
-
-POST {{jobHost}}/post
-Content-Type: application/json
-
-{
-  "title": "backend developer",
-  "description": "I want backend developer for my comnany",
-  "requirements": "React js, Shadcn ui, Api Testing",
-  "salary": "12",
-  "location": "Hydrabad",
-  "jobType": "Full Time",
-  "position": 12,
-  "experience": 1,
-  "companyId": "6782a6a91c79f0ae08afb40b"
+    "email":"vijay@gmail.com",
+    "password":"vijay123",
+    "role":"student"
 }
 
 
 ###
 
-GET {{jobHost}}/get
-
-###
-GET {{jobHost}}/getadminjobs
-
-### 
-GET {{jobHost}}/get/6783e9261a672a9b2f3f9786
-
-
-###------------Application--------------------
-
-GET {{applicationHost}}/apply/678659423f9ac4e586c42e33
-
-
-### 
-GET {{applicationHost}}/get
-
-###
-GET {{applicationHost}}/678659183f9ac4e586c42e2f/applicants
-
-###
-POST {{applicationHost}}/status/678692ba20527a0191cc5570/update
+POST {{host}}/profile/update
 Content-Type: application/json
 
 {
-  "status": "Accepted"
+    "fullname":"vijay ji"
+ 
 }
+
+
+
+###
+GET {{host}}/logout
+
+###
+
+POST {{hostcompany}}/registerCompany
+Content-Type: application/json
+
+# {
+#     "companyName":"vijay di Company"
+# }
+{
+    "companyName":"Intel"
+}
+
+
+###
+
+GET {{hostcompany}}/get
+
+###
+
+GET {{hostcompany}}/get/6782b20d034b8c02155cd965
+###
+
+PUT {{hostcompany}}/update/6782a5366cba035cb54bbd30
+Content-Type: application/json
+
+{
+    "name":"micromax"
+}
+
+###
+POST {{hostjob}}/post
+Content-Type: application/json
+
+{
+    "title":"Backend Developer",
+    "description":"I want Backend developer for my company",
+    "requirements":"Reactjs, Shadcnui, Api Testing",
+    "salary":"12",
+    "location":"agra",
+    "jobType":"Full Time",
+    "experience":1,
+    "position":12,
+    "companyId":"6782b3503a2c0842b6d56f73"
+}
+
+###
+
+GET {{hostjob}}/get
+###
+
+GET {{hostjob}}/getadminjob
+
+###
+
+GET {{hostjob}}/get/6786683884cc609d0ecd07b5
+
+###
+GET {{hostapplication}}/apply/67865e6f90c0469b8e960013
+
+###
+GET {{hostapplication}}/get
+
+###
+GET {{hostapplication}}/67ec36a734a9f7bc59d57a52/applicants
+
+###
+POST {{hostapplication}}/status/67868f46172bff46d27d7688/update
+Content-Type: application/json
+
+{
+    "status":"Accepted"
+}
+
 

@@ -22,7 +22,7 @@ const Signup = () => {
         role: "",
         file: ""
     });
-    const { loading, user } = useSelector(store => store.auth);
+    const {loading,user} = useSelector(store=>store.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const Signup = () => {
 
         try {
             dispatch(setLoading(true));
-            const res = await axios.post(`${ USER_API_END_POINT }/register`, formData, {
+            const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
                 headers: { 'Content-Type': "multipart/form-data" },
                 withCredentials: true,
             });
@@ -57,16 +57,16 @@ const Signup = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message);
-        } finally {
+        } finally{
             dispatch(setLoading(false));
         }
     }
 
-    useEffect(() => {
-        if (user) {
+    useEffect(()=>{
+        if(user){
             navigate("/");
         }
-    }, [])
+    },[])
     return (
         <div>
             <Navbar />
@@ -80,7 +80,7 @@ const Signup = () => {
                             value={input.fullname}
                             name="fullname"
                             onChange={changeEventHandler}
-                            placeholder="Enter you full Name"
+                            placeholder="Vijay Kumar"
                         />
                     </div>
                     <div className='my-2'>
@@ -90,7 +90,7 @@ const Signup = () => {
                             value={input.email}
                             name="email"
                             onChange={changeEventHandler}
-                            placeholder="Enter you Email"
+                            placeholder="vijay@gmail.com"
                         />
                     </div>
                     <div className='my-2'>
@@ -100,7 +100,7 @@ const Signup = () => {
                             value={input.phoneNumber}
                             name="phoneNumber"
                             onChange={changeEventHandler}
-                            placeholder="Enter you phone Number"
+                            placeholder="1234567890"
                         />
                     </div>
                     <div className='my-2'>
@@ -110,7 +110,7 @@ const Signup = () => {
                             value={input.password}
                             name="password"
                             onChange={changeEventHandler}
-                            placeholder="Create a password"
+                            placeholder="123"
                         />
                     </div>
                     <div className='flex items-center justify-between'>
@@ -121,7 +121,7 @@ const Signup = () => {
                                     name="role"
                                     value="student"
                                     checked={input.role === 'student'}
-                                    onChange={changeEventHandler}   
+                                    onChange={changeEventHandler}
                                     className="cursor-pointer"
                                 />
                                 <Label htmlFor="r1">Student</Label>

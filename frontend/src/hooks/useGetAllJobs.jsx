@@ -23,3 +23,4 @@ const useGetAllJobs = () => {
 }
 
 export default useGetAllJobs
+
